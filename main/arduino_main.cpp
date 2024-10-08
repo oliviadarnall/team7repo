@@ -50,7 +50,7 @@ void onDisconnectedGamepad(GamepadPtr gp) {
         }
     }
 }
-
+#define LED 2
 // Arduino setup function. Runs in CPU 1
 void setup() {
     // Setup the Bluepad32 callbacks
@@ -62,12 +62,13 @@ void setup() {
 	ESP32PWM::allocateTimer(2);
 	ESP32PWM::allocateTimer(3);
 
-    // TODO: Write your setup code here
+    pinMode (LED, OUTPUT);
+   
 }
 
 // Arduino loop function. Runs in CPU 1
 void loop() {
-    BP32.update();
+    //BP32.update();
 
     for (int i = 0; i < BP32_MAX_GAMEPADS; i++) {
         GamepadPtr myGamepad = myGamepads[i];
@@ -77,7 +78,8 @@ void loop() {
         }
     }
 
-    // TODO: Write your periodic code here
-
-    vTaskDelay(1);
+     digitalWrite(LED, HIGH);
+delay(1000);
+     digitalWrite(LED, LOW);
+     delay(1000);
 }
